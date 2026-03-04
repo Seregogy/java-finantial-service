@@ -19,12 +19,15 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-security")
-	implementation("org.springframework.boot:spring-boot-starter-webmvc")
-	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-	testImplementation("org.springframework.boot:spring-boot-starter-security-test")
-	testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	implementation(libs.spring.boot.security)
+	implementation(libs.spring.boot.webmvc)
+
+	developmentOnly(libs.spring.boot.docker.compose)
+
+	testImplementation(libs.spring.boot.security.test)
+	testImplementation(libs.spring.boot.webmvc.test)
+
+	testRuntimeOnly(libs.junit.platform)
 }
 
 tasks.withType<Test> {
