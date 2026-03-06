@@ -1,1 +1,1 @@
-# java-finantial-service
+# java-financial-service
