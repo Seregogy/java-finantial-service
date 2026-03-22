@@ -1,4 +1,4 @@
-package com.finantial.loan.auto;
+package com.financial.loan.auto;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

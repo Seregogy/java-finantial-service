@@ -4,7 +4,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.7"
 }
 
-group = "com.finantial.loan"
+group = "com.financial.loan"
 version = "0.0.1-SNAPSHOT"
 description = "Backend service for auto loan automation"
 

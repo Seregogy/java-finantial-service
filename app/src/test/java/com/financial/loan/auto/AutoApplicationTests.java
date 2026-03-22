@@ -1,4 +1,4 @@
-package com.finantial.loan.auto;
+package com.financial.loan.auto;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
