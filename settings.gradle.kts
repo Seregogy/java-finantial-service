@@ -1,3 +1,4 @@
 rootProject.name = "auto-loan-service"
 include(":app")
-include("domain")
+include(":domain")
+include(":persistence")
