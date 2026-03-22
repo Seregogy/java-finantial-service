@@ -1,5 +1,6 @@
 [versions]
-
+junitBomVersion = "5.10.0"
+lombokVersion = "1.18.36"
 
 [libraries]
 spring-boot-security = { module = "org.springframework.boot:spring-boot-starter-security" }
@@ -11,3 +12,7 @@ spring-boot-security-test = { module = "org.springframework.boot:spring-boot-sta
 spring-boot-webmvc-test = { module = "org.springframework.boot:spring-boot-starter-webmvc-test" }
 
 junit-platform = { module = "org.junit.platform:junit-platform-launcher" }
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junitBomVersion" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter"}
+
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombokVersion" }
