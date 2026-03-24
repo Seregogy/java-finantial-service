@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -13,15 +13,15 @@ import java.util.UUID;
 public class UserAdditionalData {
     private final UUID id;
     private final UUID userId;
-    private final Timestamp birthday;
+    private final LocalDateTime birthday;
     private final String password;
     private final BigDecimal monthlyIncome;
-    private final Timestamp createdAt;
-    private final Timestamp updatedAt;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime updatedAt;
 
     public static UserAdditionalData create(
             UUID userId,
-            Timestamp birthday,
+            LocalDateTime birthday,
             String password,
             BigDecimal monthlyIncome) {
 
@@ -31,11 +31,11 @@ public class UserAdditionalData {
         if (password == null || password.isBlank()) {
             throw new IllegalArgumentException("password cannot be blank");
         }
-        if (monthlyIncome != null && monthlyIncome.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("monthlyIncome cannot be negative");
+        if (monthlyIncome == null || monthlyIncome.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("monthlyIncome cannot be null or negative");
         }
 
-        Timestamp now = new Timestamp(System.currentTimeMillis());
+        LocalDateTime now = LocalDateTime.now();
 
         return new UserAdditionalData(
                 UUID.randomUUID(),

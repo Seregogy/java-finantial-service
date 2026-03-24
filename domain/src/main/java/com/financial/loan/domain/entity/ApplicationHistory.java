@@ -5,7 +5,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -16,14 +16,14 @@ public class ApplicationHistory {
     private final Status oldStatus;
     private final Status newStatus;
     private final UUID changedBy;
-    private final Timestamp changedAt;
+    private final LocalDateTime changedAt;
 
     public static ApplicationHistory create(
             UUID applicationId,
             Status oldStatus,
             Status newStatus,
             UUID changedBy,
-            Timestamp changedAt) {
+            LocalDateTime changedAt) {
 
         if (applicationId == null) {
             throw new IllegalArgumentException("applicationId cannot be null");
@@ -38,7 +38,7 @@ public class ApplicationHistory {
             throw new IllegalArgumentException("changedBy cannot be null");
         }
 
-        Timestamp timestamp = changedAt != null ? changedAt : new Timestamp(System.currentTimeMillis());
+        LocalDateTime timestamp = changedAt != null ? changedAt : LocalDateTime.now();
 
         return new ApplicationHistory(
                 UUID.randomUUID(),

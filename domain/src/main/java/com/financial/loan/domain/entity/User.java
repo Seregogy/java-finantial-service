@@ -5,7 +5,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -14,8 +14,8 @@ public class User {
     private final UUID id;
     private final String fullName;
     private final Role role;
-    private final Timestamp createdAt;
-    private final Timestamp updatedAt;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime updatedAt;
 
     public static User create(
             String fullName,
@@ -28,7 +28,7 @@ public class User {
             throw new IllegalArgumentException("role cannot be null");
         }
 
-        Timestamp now = new Timestamp(System.currentTimeMillis());
+        LocalDateTime now = LocalDateTime.now();
 
         return new User(
                 UUID.randomUUID(),
