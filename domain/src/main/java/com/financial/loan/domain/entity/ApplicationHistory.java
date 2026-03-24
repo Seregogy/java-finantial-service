@@ -25,7 +25,7 @@ public class ApplicationHistory {
             UUID changedBy,
             LocalDateTime changedAt) {
 
- 
+
         Result<UUID> validId = validateApplicationId(applicationId);
         if (validId.isFailure()) {
             return Result.failure(validId.getError());

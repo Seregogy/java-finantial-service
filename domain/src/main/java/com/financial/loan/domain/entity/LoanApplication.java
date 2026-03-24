@@ -22,35 +22,41 @@ public class LoanApplication {
     private final LocalDateTime created;
     private final LocalDateTime updated;
 
-    public static LoanApplication create(
+    public static Result<LoanApplication> create(
             UUID carId,
             UUID userId,
             BigDecimal loanAmount,
             BigDecimal firstPayment,
             LocalDateTime term) {
 
-        if (carId == null) {
-            throw new IllegalArgumentException("carId cannot be null");
+        Result<UUID> validCarId = validateCarId(carId);
+        if (validCarId.isFailure()) {
+            return Result.failure(validCarId.getError());
         }
-        if (userId == null) {
-            throw new IllegalArgumentException("userId cannot be null");
+
+        Result<UUID> validUserId = validateUserId(userId);
+        if (validUserId.isFailure()) {
+            return Result.failure(validUserId.getError());
         }
-        if (loanAmount == null || loanAmount.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("loanAmount cannot be null negative");
+
+        Result<BigDecimal> validLoanAmount = validateLoanAmount(loanAmount);
+        if (validLoanAmount.isFailure()) {
+            return Result.failure(validLoanAmount.getError());
         }
-        if (firstPayment == null || firstPayment.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("firstPayment cannot be null or negative");
+
+        Result<BigDecimal> validFirstPayment = validateFirstPayment(firstPayment, loanAmount);
+        if (validFirstPayment.isFailure()) {
+            return Result.failure(validFirstPayment.getError());
         }
-        if (firstPayment.compareTo(loanAmount) > 0) {
-            throw new IllegalArgumentException("firstPayment cannot be greater than loanAmount");
-        }
-        if (term == null) {
-            throw new IllegalArgumentException("term cannot be null");
+
+        Result<LocalDateTime> validTerm = validateTerm(term);
+        if (validTerm.isFailure()) {
+            return Result.failure(validTerm.getError());
         }
 
         LocalDateTime now = LocalDateTime.now();
 
-        return new LoanApplication(
+        return Result.success(new LoanApplication(
                 UUID.randomUUID(),
                 carId,
                 userId,
@@ -59,6 +65,57 @@ public class LoanApplication {
                 term,
                 Status.NEW,
                 now,
-                now);
+                now
+        ));
+    }
+
+    private static Result<UUID> validateCarId(UUID carId) {
+        if (carId == null) {
+            return Result.failure("carId cannot be null");
+        }
+        return Result.success(carId);
+    }
+
+    private static Result<UUID> validateUserId(UUID userId) {
+        if (userId == null) {
+            return Result.failure("userId cannot be null");
+        }
+        return Result.success(userId);
+    }
+
+    private static Result<BigDecimal> validateLoanAmount(BigDecimal loanAmount) {
+        if (loanAmount == null) {
+            return Result.failure("loanAmount cannot be null");
+        }
+        if (loanAmount.compareTo(BigDecimal.ZERO) < 0) {
+            return Result.failure("loanAmount cannot be negative");
+        }
+        if (loanAmount.compareTo(BigDecimal.ZERO) == 0) {
+            return Result.failure("loanAmount must be greater than zero");
+        }
+        return Result.success(loanAmount);
+    }
+
+    private static Result<BigDecimal> validateFirstPayment(BigDecimal firstPayment, BigDecimal loanAmount) {
+        if (firstPayment == null) {
+            return Result.failure("firstPayment cannot be null");
+        }
+        if (firstPayment.compareTo(BigDecimal.ZERO) < 0) {
+            return Result.failure("firstPayment cannot be negative");
+        }
+        if (firstPayment.compareTo(loanAmount) > 0) {
+            return Result.failure("firstPayment cannot be greater than loanAmount");
+        }
+        return Result.success(firstPayment);
+    }
+
+    private static Result<LocalDateTime> validateTerm(LocalDateTime term) {
+        if (term == null) {
+            return Result.failure("term cannot be null");
+        }
+        if (term.isBefore(LocalDateTime.now())) {
+            return Result.failure("term cannot be in the past");
+        }
+        return Result.success(term);
     }
 }
