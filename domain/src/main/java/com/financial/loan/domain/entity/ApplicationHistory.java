@@ -18,34 +18,68 @@ public class ApplicationHistory {
     private final UUID changedBy;
     private final LocalDateTime changedAt;
 
-    public static ApplicationHistory create(
+    public static Result<ApplicationHistory> create(
             UUID applicationId,
             Status oldStatus,
             Status newStatus,
             UUID changedBy,
             LocalDateTime changedAt) {
 
-        if (applicationId == null) {
-            throw new IllegalArgumentException("applicationId cannot be null");
+ 
+        Result<UUID> validId = validateApplicationId(applicationId);
+        if (validId.isFailure()) {
+            return Result.failure(validId.getError());
         }
-        if (oldStatus == null) {
-            throw new IllegalArgumentException("oldStatus cannot be null");
+
+
+        Result<Boolean> validStatuses = validateStatuses(oldStatus, newStatus);
+        if (validStatuses.isFailure()) {
+            return Result.failure(validStatuses.getError());
         }
-        if (newStatus == null) {
-            throw new IllegalArgumentException("newStatus cannot be null");
+
+
+        Result<UUID> validChangedBy = validateChangedBy(changedBy);
+        if (validChangedBy.isFailure()) {
+            return Result.failure(validChangedBy.getError());
         }
-        if (changedBy == null) {
-            throw new IllegalArgumentException("changedBy cannot be null");
-        }
+
 
         LocalDateTime timestamp = changedAt != null ? changedAt : LocalDateTime.now();
 
-        return new ApplicationHistory(
+        return Result.success(new ApplicationHistory(
                 UUID.randomUUID(),
                 applicationId,
                 oldStatus,
                 newStatus,
                 changedBy,
-                timestamp);
+                timestamp
+        ));
+    }
+
+    private static Result<UUID> validateApplicationId(UUID applicationId) {
+        if (applicationId == null) {
+            return Result.failure("applicationId cannot be null");
+        }
+        return Result.success(applicationId);
+    }
+
+    private static Result<Boolean> validateStatuses(Status oldStatus, Status newStatus) {
+        if (oldStatus == null) {
+            return Result.failure("oldStatus cannot be null");
+        }
+        if (newStatus == null) {
+            return Result.failure("newStatus cannot be null");
+        }
+        if (oldStatus == newStatus) {
+            return Result.failure("oldStatus and newStatus cannot be the same");
+        }
+        return Result.success(true);
+    }
+
+    private static Result<UUID> validateChangedBy(UUID changedBy) {
+        if (changedBy == null) {
+            return Result.failure("changedBy cannot be null");
+        }
+        return Result.success(changedBy);
     }
 }
