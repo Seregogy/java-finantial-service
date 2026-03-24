@@ -17,24 +17,48 @@ public class User {
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
 
-    public static User create(
+    public static Result<User> create(
             String fullName,
             Role role) {
 
-        if (fullName == null || fullName.isBlank()) {
-            throw new IllegalArgumentException("fullName cannot be null or blank");
+        Result<String> validFullName = validateFullName(fullName);
+        if (validFullName.isFailure()) {
+            return Result.failure(validFullName.getError());
         }
-        if (role == null) {
-            throw new IllegalArgumentException("role cannot be null");
+
+        Result<Role> validRole = validateRole(role);
+        if (validRole.isFailure()) {
+            return Result.failure(validRole.getError());
         }
 
         LocalDateTime now = LocalDateTime.now();
 
-        return new User(
+        return Result.success(new User(
                 UUID.randomUUID(),
                 fullName,
                 role,
                 now,
-                now);
+                now
+        ));
+    }
+
+    private static Result<String> validateFullName(String fullName) {
+        if (fullName == null || fullName.isBlank()) {
+            return Result.failure("fullName cannot be null or blank");
+        }
+        if (fullName.length() < 3) {
+            return Result.failure("fullName must be at least 3 characters long");
+        }
+        if (fullName.length() > 100) {
+            return Result.failure("fullName cannot exceed 100 characters");
+        }
+        return Result.success(fullName);
+    }
+
+    private static Result<Role> validateRole(Role role) {
+        if (role == null) {
+            return Result.failure("role cannot be null");
+        }
+        return Result.success(role);
     }
 }
