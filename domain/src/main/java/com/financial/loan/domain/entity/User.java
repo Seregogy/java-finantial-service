@@ -10,8 +10,8 @@ import java.util.UUID;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class User{
-    private final  UUID id;
+public class User {
+    private final UUID id;
     private final String fullName;
     private final Role role;
     private final Timestamp createdAt;
@@ -19,8 +19,8 @@ public class User{
 
     public static User create(
             String fullName,
-            Role role
-    ){
+            Role role) {
+
         if (fullName == null || fullName.isBlank()) {
             throw new IllegalArgumentException("fullName cannot be null or blank");
         }
@@ -29,7 +29,9 @@ public class User{
         }
 
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        return new User(UUID.randomUUID(),
+
+        return new User(
+                UUID.randomUUID(),
                 fullName,
                 role,
                 now,
