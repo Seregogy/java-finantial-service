@@ -16,6 +16,7 @@ public interface LoanApplicationRepository {
     UUID createLoanApplication(ApplicationHistory entity);
 
     UUID updateLoansApplication(
+            UUID loanApplicationId,
             UUID carId,
             UUID userId,
             BigDecimal loanAmount,

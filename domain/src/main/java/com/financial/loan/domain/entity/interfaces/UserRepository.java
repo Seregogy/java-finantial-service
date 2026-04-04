@@ -14,6 +14,7 @@ public interface UserRepository {
     UUID createUser(User entity);
 
     UUID updateUser(
+            UUID userId,
             String fullName,
             Role role
     );
