@@ -11,13 +11,13 @@ public interface UserRepository {
 
     User getUserById(UUID userId);
 
-    UUID createUser(User entity);
+    UUID create(User entity);
 
-    UUID updateUser(
+    UUID update(
             UUID userId,
             String fullName,
             Role role
     );
 
-    UUID deleteUser(UUID userId);
+    UUID delete(UUID userId);
 }
