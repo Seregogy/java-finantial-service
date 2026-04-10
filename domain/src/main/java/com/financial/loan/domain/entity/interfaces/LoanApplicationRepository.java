@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.UUID;
 
 public interface LoanApplicationRepository {
-    List<LoanApplication> getLoansApplication();
+    List<LoanApplication> getAll();
 
-    LoanApplication getLoanApplicationById(UUID loanApplicationId);
+    LoanApplication get(UUID loanApplicationId);
 
-    UUID createLoanApplication(ApplicationHistory entity);
+    UUID create(LoanApplication entity);
 
-    UUID updateLoansApplication(
+    UUID update(
             UUID loanApplicationId,
             UUID carId,
             UUID userId,
@@ -24,5 +24,5 @@ public interface LoanApplicationRepository {
             LocalDateTime term
     );
 
-    UUID deleteLoanApplication(UUID loanApplicationId);
+    UUID delete(UUID loanApplicationId);
 }
