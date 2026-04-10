@@ -9,12 +9,12 @@ public interface CarRepository
 {
     public UUID create(Car entity) ;
 
-    public List<Car> get();
+    public List<Car> getAll();
 
     public Car  getByLoan(UUID idLoan);
 
     public UUID Delete(UUID idCar);
 
-    public UUID Update(UUID idCar);
+    public UUID Update(UUID idCar , Car car );
 
 }

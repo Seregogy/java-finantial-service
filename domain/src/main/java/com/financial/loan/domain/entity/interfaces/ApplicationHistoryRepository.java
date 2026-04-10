@@ -10,12 +10,12 @@ public interface ApplicationHistoryRepository
 {
     public UUID create(ApplicationHistory entity);
 
-    public List<ApplicationHistory> get();
+    public List<ApplicationHistory> getAll();
 
     public Car  getByLoan(UUID idLoan);
 
     public UUID Delete(UUID id);
 
-    public UUID Update(UUID idLoan);
-    
+    public UUID Update(UUID idLoa , Car car);
+
 }
