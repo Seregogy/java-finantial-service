@@ -32,6 +32,7 @@ jooq {
 					driver = "org.postgresql.Driver"
 					url = "jdbc:postgresql://localhost:5432/auto-loan-service"
 					user = "postgres"
+                    password = "postgres"
 				}
 
 				generator.apply {
@@ -48,7 +49,7 @@ jooq {
 
 					target.apply {
 						packageName = "com.financial.loan.persistence.model"
-						directory = "src/main/java"
+						directory = "src/main/java/generated"
 					}
 				}
 			}
