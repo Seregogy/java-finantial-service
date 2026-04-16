@@ -1,0 +1,20 @@
+package com.financial.loan.domain.entity.usecase;
+
+import com.financial.loan.domain.entity.Result;
+import com.financial.loan.domain.entity.User;
+import com.financial.loan.domain.entity.enums.Role;
+import com.financial.loan.domain.entity.interfaces.UserRepository;
+import lombok.AllArgsConstructor;
+
+import java.util.UUID;
+
+@AllArgsConstructor
+public class DeleteUserUseCase {
+    private final UserRepository userRepository;
+
+    public Result<UUID> execute(UUID userId) {
+        userRepository.delete(userId);
+
+        return Result.success(userId);
+    }
+}
