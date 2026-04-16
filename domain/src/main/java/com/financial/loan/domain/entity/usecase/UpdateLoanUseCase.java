@@ -11,11 +11,11 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @AllArgsConstructor
-public class CreateLoanUseCase {
+public class UpdateLoanUseCase {
 
     private final LoanApplicationRepository _loanRepository;
 
-    public Result<UUID> execute( UUID carId, UUID userId, BigDecimal loanAmount, BigDecimal firstPayment,  LocalDateTime term) {
+    public Result<UUID> execute(UUID idLoan ,UUID carId, UUID userId, BigDecimal loanAmount, BigDecimal firstPayment,  LocalDateTime term) {
         Result<LoanApplication> loanResult = LoanApplication.create(carId, userId, loanAmount, firstPayment , term);
 
         if (loanResult.isFailure()) {
@@ -24,7 +24,7 @@ public class CreateLoanUseCase {
 
         LoanApplication loan = loanResult.getValue();
 
-        _loanRepository.create(loan);
+        _loanRepository.update(idLoan , loan);
 
         return Result.success(loan.getId());
     }
