@@ -1,28 +1,16 @@
 package com.financial.loan.domain.entity.interfaces;
-
-import com.financial.loan.domain.entity.ApplicationHistory;
 import com.financial.loan.domain.entity.LoanApplication;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 public interface LoanApplicationRepository {
-    List<LoanApplication> getAll();
+    List<LoanApplication> getAll(int page, int size);
 
-    LoanApplication get(UUID loanApplicationId);
+    LoanApplication getById(UUID loanApplicationId);
 
     UUID create(LoanApplication entity);
 
-    UUID update(
-            UUID loanApplicationId,
-            UUID carId,
-            UUID userId,
-            BigDecimal loanAmount,
-            BigDecimal firstPayment,
-            LocalDateTime term
-    );
+    UUID update(UUID idLoan , LoanApplication loan);
 
     UUID delete(UUID loanApplicationId);
 }
