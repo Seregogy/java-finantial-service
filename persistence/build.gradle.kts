@@ -11,11 +11,16 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":domain"))
+
 	testImplementation(platform(libs.junit.bom))
 	testImplementation(libs.junit.jupiter)
 
 	implementation(libs.postgres.driver)
 	jooqGenerator(libs.postgres.driver)
+
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
 }
 
 tasks.test {

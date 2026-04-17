@@ -3,6 +3,7 @@ package com.financial.loan.domain.entity;
 import com.financial.loan.domain.entity.enums.Role;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class User {
     private final UUID id;
     private final String fullName;
