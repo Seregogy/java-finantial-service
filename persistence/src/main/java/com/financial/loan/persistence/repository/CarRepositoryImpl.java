@@ -34,6 +34,9 @@ public class CarRepositoryImpl implements CarRepository {
                 .get(CAR.ID);
     }
 
+    /**
+    * TODO: Тут тоже нужна пагинация!!!
+    * */
     @Override
     public List<Car> getAll() {
         return context.selectFrom(CAR)

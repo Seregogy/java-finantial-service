@@ -18,7 +18,7 @@ public class UserRepositoryImpl implements UserRepository {
     private final UserMapper userMapper;
 
     /**
-     * @return Все пользователи из таблицы. Нужна пагинация!!!
+     * @return TODO: Все пользователи из таблицы. Нужна пагинация!!!
      */
     @Override
     public List<User> getUsers() {
