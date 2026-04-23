@@ -3,6 +3,7 @@ package com.financial.loan.persistence.repository;
 import com.financial.loan.domain.entity.Car;
 import com.financial.loan.domain.entity.interfaces.CarRepository;
 import com.financial.loan.persistence.mapper.CarMapper;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 
@@ -13,6 +14,7 @@ import java.util.UUID;
 import static com.financial.loan.persistence.model.Tables.LOAN_APPLICATION;
 import static com.financial.loan.persistence.model.Tables.CAR;
 
+@Builder
 @RequiredArgsConstructor
 public class CarRepositoryImpl implements CarRepository {
     private final DSLContext context;

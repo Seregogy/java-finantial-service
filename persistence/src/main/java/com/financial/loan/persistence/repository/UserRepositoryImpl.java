@@ -4,6 +4,7 @@ import com.financial.loan.domain.entity.User;
 import com.financial.loan.domain.entity.enums.Role;
 import com.financial.loan.domain.entity.interfaces.UserRepository;
 import com.financial.loan.persistence.mapper.UserMapper;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 
@@ -12,6 +13,7 @@ import java.util.UUID;
 
 import static com.financial.loan.persistence.model.Tables.USER;
 
+@Builder
 @RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
     private final DSLContext context;
