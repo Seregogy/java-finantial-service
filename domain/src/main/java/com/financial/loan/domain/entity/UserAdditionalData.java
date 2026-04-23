@@ -19,11 +19,14 @@ public class UserAdditionalData {
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
 
+    private final String passport;
+
     public static Result<UserAdditionalData> create(
             UUID userId,
             LocalDateTime birthday,
             String password,
-            BigDecimal monthlyIncome) {
+            BigDecimal monthlyIncome,
+            String passport) {
 
         Result<UUID> validUserId = validateUserId(userId);
         if (validUserId.isFailure()) {
@@ -49,7 +52,8 @@ public class UserAdditionalData {
                 password,
                 monthlyIncome,
                 now,
-                now
+                now,
+                passport
         ));
     }
 
