@@ -1,4 +1,4 @@
-package com.financial.loan.domain.entity.usecase;
+package com.financial.loan.domain.entity.usecase.loan;
 
 import com.financial.loan.domain.entity.LoanApplication;
 import com.financial.loan.domain.entity.Result;

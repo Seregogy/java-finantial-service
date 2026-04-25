@@ -1,8 +1,6 @@
-package com.financial.loan.domain.entity.usecase;
+package com.financial.loan.domain.entity.usecase.user;
 
 import com.financial.loan.domain.entity.Result;
-import com.financial.loan.domain.entity.User;
-import com.financial.loan.domain.entity.enums.Role;
 import com.financial.loan.domain.entity.interfaces.UserRepository;
 import lombok.AllArgsConstructor;
 
