@@ -1,10 +1,18 @@
 package com.financial.loan.domain.entity.interfaces;
 
+import com.financial.loan.domain.entity.ValueObject.Passport;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public interface UserAdditionalDataRepository {
+
+
+    Passport getPassportByUserId(UUID user);
+
+
+    //снизу бред
     UserAdditionalDataRepository getById(UUID userAdditionalDataId);
 
     UUID createUserAdditionalData(UserAdditionalDataRepository entity);
@@ -15,6 +23,8 @@ public interface UserAdditionalDataRepository {
             String password,
             BigDecimal monthlyIncome
     );
+
+
 
     UUID deleteUserAdditionalData(UUID userAdditionalDataId);
 }

@@ -8,6 +8,8 @@ public interface LoanApplicationRepository {
 
     LoanApplication getById(UUID loanApplicationId);
 
+    List<LoanApplication> getByIdUser(UUID userId);
+
     UUID create(LoanApplication entity);
 
     UUID update(UUID idLoan , LoanApplication loan);
