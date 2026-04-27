@@ -3,7 +3,7 @@ package com.financial.loan.domain.entity;
 import com.financial.loan.domain.entity.enums.Status;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-Aimport lombok.Builder;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.math.BigDecimal;
