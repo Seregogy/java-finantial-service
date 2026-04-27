@@ -4,6 +4,7 @@ import com.financial.loan.domain.entity.User;
 import com.financial.loan.domain.entity.enums.Role;
 import com.financial.loan.domain.entity.interfaces.UserRepository;
 import com.financial.loan.persistence.mapper.UserMapper;
+import com.financial.loan.persistence.mapper.UserRoleMapper;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
@@ -45,7 +46,7 @@ public class UserRepositoryImpl implements UserRepository {
                 .set(USER.SURNAME, fullName[0])
                 .set(USER.NAME, fullName[1])
                 .set(USER.PATRONYMIC, fullName[2])
-                .set(USER.ROLE, entity.getRole().toString())
+                .set(USER.ROLE, UserRoleMapper.toDb(entity.getRole()))
                 .returning()
                 .fetchOne()
                 .getId();

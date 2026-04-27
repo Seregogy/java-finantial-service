@@ -23,13 +23,13 @@ services:
     container_name: auto-loan-service-flyway
     command: -url=jdbc:postgresql://postgres:5432/auto-loan-service -user=postgres -password=postgres -connectRetries=60 migrate
     volumes:
-      - ./persistence/src/main/java/com/financial/loan/persistence/migration/postgres:/flyway/sql  # Папка с вашими миграциями
+      - ./persistence/src/main/java/com/financial/loan/persistence/migration/postgres:/flyway/sql
     depends_on:
       postgres:
         condition: service_healthy
     networks:
       - app-network
-    restart: "no"  # Выполнится один раз и остановится
+    restart: "no"
 
   adminer:
     image: adminer

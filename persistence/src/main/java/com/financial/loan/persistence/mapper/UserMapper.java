@@ -14,7 +14,9 @@ public class UserMapper implements RecordMapper<Record, User> {
         return User.builder()
                 .id(record.get(USER.ID))
                 .fullName(record.get(USER.NAME))
-                .role(Role.valueOf(record.get(USER.ROLE)))
+                .role(UserRoleMapper.toDomain(
+                    record.get(USER.ROLE)
+                ))
                 .createdAt(record.get(USER.CREATED_AT))
                 .updatedAt(record.get(USER.UPDATED_AT))
                 .build();
